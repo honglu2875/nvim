@@ -1,0 +1,27 @@
+*codex.txt*  Personal native Codex client
+
+The full guide and code map are in plugins/codex.nvim/README.md.
+
+COMMANDS                                                    *codex-commands*
+
+:Codex                 Toggle the native chat panel.
+:CodexAsk {text}        Prepare an editable draft without submitting it.
+:[range]CodexContext   Append the source buffer/lines to the draft.
+:CodexSend             Submit the draft using the current project's thread.
+:CodexCancel           Interrupt the active turn.
+:CodexNew              Start a fresh conversation (after cancelling active work).
+:CodexResume [id]      Resume the last project thread or an explicit id.
+:CodexReview           Show the latest reported patch.
+:CodexStop             Stop the local app-server child process.
+:checkhealth codex     Check the executable and protocol baseline.
+
+In the prompt: Ctrl-S sends; normal-mode Enter sends; insert-mode Enter adds a
+newline. Ctrl-C cancels a turn. Normal-mode q hides the panel without cancelling.
+
+The client inherits the installed Codex CLI's login, model and permission policy.
+Project state is stored outside the configuration repository. Opening a panel
+or preparing context does not submit a prompt or start a model request.
+
+For settings, see require('codex').setup() in lua/plugins/codex.lua and the README.
+
+vim:tw=78:ts=8:ft=help:norl:

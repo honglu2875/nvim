@@ -1,0 +1,7 @@
+.DS_Store
+*.swp
+*.swo
+*~
+.luarc.json
+/test-results/
+**/doc/tags
