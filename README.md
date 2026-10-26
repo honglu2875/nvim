@@ -4,16 +4,14 @@ A small, independent Lua configuration, with a locally owned Codex app-server
 client in `plugins/codex.nvim`. Kickstart informed the basic editor settings;
 this repository has no dependency on its configuration or Git history.
 
-## Try this build
+## Use
 
 ```sh
-NVIM_APPNAME=nvim-next nvim
+nvim
 ```
 
-The app name isolates configuration, plugins, Mason packages, cache, and state.
-The previous setup remains available with ordinary `nvim` while this build is
-being tried. A complete snapshot of that setup is stored separately under
-`~/.local/state/nvim-maintenance/`.
+Install this repository at `~/.config/nvim` to use it as the default configuration.
+Space is the leader key: `<leader>j` opens Flash and `<leader>aa` opens Codex.
 
 ## Installation
 
@@ -23,8 +21,14 @@ development require their toolchains; Lean uses Elan and each project's
 `lean-toolchain`. A Nerd Font is assumed; disable `have_nerd_font` in `init.lua`
 if needed. Clipboard integration uses the host's clipboard utility.
 
-Clone this repository to your chosen Neovim configuration directory. For an
-isolated installation named `nvim-next`, start it with the command above, then:
+On a new machine, clone the repository into the standard configuration directory:
+
+```sh
+git clone git@github.com:honglu2875/nvim.git ~/.config/nvim
+nvim
+```
+
+Install the configured plugins, language tools, and parsers:
 
 ```vim
 :Lazy sync
@@ -37,8 +41,8 @@ as well as editor tools. The parser step requires it to be installed first.
 For a scripted installation from the repository directory:
 
 ```sh
-NVIM_APPNAME=nvim-next nvim --headless '+Lazy! restore' +qa
-NVIM_APPNAME=nvim-next nvim --headless '+luafile scripts/bootstrap.lua'
+nvim --headless '+Lazy! restore' +qa
+nvim --headless '+luafile scripts/bootstrap.lua'
 ```
 
 `lazy-lock.json` pins plugins. `lua/config/tools.lua` is the tool/parser manifest;
@@ -132,19 +136,20 @@ updates are not triggered automatically on every startup.
 nvim --headless -u NONE -l plugins/codex.nvim/tests/run.lua
 
 # Real installed LSPs, formatters, parsers and Flash, in temporary projects.
-NVIM_APPNAME=nvim-next nvim --headless '+luafile scripts/smoke.lua'
-NVIM_APPNAME=nvim-next nvim --headless '+luafile scripts/git-smoke.lua'
+nvim --headless '+luafile scripts/smoke.lua'
+nvim --headless '+luafile scripts/git-smoke.lua'
 
 # Full health report in the editor.
-NVIM_APPNAME=nvim-next nvim '+checkhealth'
+nvim '+checkhealth'
 ```
 
 The integration fixture currently uses Go 1.26+ and Lean 4.19.0. The latter is
 deliberate: it checks that an older project's Lean toolchain is respected.
 
-The independent Git repository is ready for a private GitHub remote after the
-configuration and first plugin version have been tried. Runtime downloads,
-Codex account data, transcripts and backups do not belong in the repository.
+The upstream repository is [honglu2875/nvim](https://github.com/honglu2875/nvim).
+Commit configuration changes and the plugin lockfile, then sync using normal
+Git commands from `~/.config/nvim`. Runtime downloads, Codex account data,
+transcripts and backups stay outside Git.
 
 ## Acknowledgment
 
